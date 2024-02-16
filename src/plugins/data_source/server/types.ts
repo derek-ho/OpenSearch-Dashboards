@@ -35,7 +35,7 @@ export interface DataSourceClientParams {
   dataSourceId?: string;
   // required when creating test client
   testClientDataSourceAttr?: DataSourceAttributes;
-  // custom API schema registry 
+  // custom API schema registry promise, required for getting registered custom API schema
   customApiSchemaRegistryPromise: Promise<CustomApiSchemaRegistry>;
 }
 

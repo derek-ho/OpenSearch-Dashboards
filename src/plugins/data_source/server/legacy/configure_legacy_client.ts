@@ -37,7 +37,12 @@ import {
 import { CustomApiSchemaRegistry } from '../schema_register';
 
 export const configureLegacyClient = async (
-  { dataSourceId, savedObjects, cryptography, customApiSchemaRegistryPromise }: DataSourceClientParams,
+  {
+    dataSourceId,
+    savedObjects,
+    cryptography,
+    customApiSchemaRegistryPromise,
+  }: DataSourceClientParams,
   callApiParams: LegacyClientCallAPIParams,
   openSearchClientPoolSetup: OpenSearchClientPoolSetup,
   config: DataSourcePluginConfigType,

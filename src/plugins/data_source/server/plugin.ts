@@ -33,7 +33,6 @@ import { registerTestConnectionRoute } from './routes/test_connection';
 import { AuthenticationMethodRegistery, IAuthenticationMethodRegistery } from './auth_registry';
 import { CustomApiSchemaRegistry } from './schema_register';
 
-
 export class DataSourcePlugin implements Plugin<DataSourcePluginSetup, DataSourcePluginStart> {
   private readonly logger: Logger;
   private readonly cryptographyService: CryptographyService;
@@ -167,7 +166,7 @@ export class DataSourcePlugin implements Plugin<DataSourcePluginSetup, DataSourc
     logger: Logger,
     auditTrailPromise: Promise<AuditorFactory>,
     authRegistryPromise: Promise<IAuthenticationMethodRegistery>,
-    customApiSchemaRegistryPromise: Promise<CustomApiSchemaRegistry>,
+    customApiSchemaRegistryPromise: Promise<CustomApiSchemaRegistry>
   ): IContextProvider<RequestHandler<unknown, unknown, unknown>, 'dataSource'> => {
     return (context, req) => {
       return {
