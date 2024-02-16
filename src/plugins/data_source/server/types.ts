@@ -19,7 +19,7 @@ import {
 import { CryptographyServiceSetup } from './cryptography_service';
 import { DataSourceError } from './lib/error';
 import { IAuthenticationMethodRegistery } from './auth_registry';
-import { CustomApiSchemaRegistry } from './schema_register';
+import { CustomApiSchemaRegistry } from './schema_registry';
 
 export interface LegacyClientCallAPIParams {
   endpoint: string;

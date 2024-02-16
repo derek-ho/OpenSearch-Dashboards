@@ -34,7 +34,7 @@ import {
   getDataSource,
   generateCacheKey,
 } from '../client/configure_client_utils';
-import { CustomApiSchemaRegistry } from '../schema_register';
+import { CustomApiSchemaRegistry } from '../schema_registry';
 
 export const configureLegacyClient = async (
   {

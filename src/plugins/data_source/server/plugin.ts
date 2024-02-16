@@ -31,7 +31,7 @@ import { ensureRawRequest } from '../../../../src/core/server/http/router';
 import { createDataSourceError } from './lib/error';
 import { registerTestConnectionRoute } from './routes/test_connection';
 import { AuthenticationMethodRegistery, IAuthenticationMethodRegistery } from './auth_registry';
-import { CustomApiSchemaRegistry } from './schema_register';
+import { CustomApiSchemaRegistry } from './schema_registry';
 
 export class DataSourcePlugin implements Plugin<DataSourcePluginSetup, DataSourcePluginStart> {
   private readonly logger: Logger;

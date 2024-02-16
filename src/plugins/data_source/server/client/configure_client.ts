@@ -27,7 +27,7 @@ import {
   getDataSource,
   generateCacheKey,
 } from './configure_client_utils';
-import { CustomApiSchemaRegistry } from '../schema_register';
+import { CustomApiSchemaRegistry } from '../schema_registry';
 
 export const configureClient = async (
   {
