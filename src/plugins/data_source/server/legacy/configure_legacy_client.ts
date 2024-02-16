@@ -34,9 +34,10 @@ import {
   getDataSource,
   generateCacheKey,
 } from '../client/configure_client_utils';
+import { CustomApiSchemaRegistry } from '../schema_register';
 
 export const configureLegacyClient = async (
-  { dataSourceId, savedObjects, cryptography }: DataSourceClientParams,
+  { dataSourceId, savedObjects, cryptography, customApiSchemaRegistryPromise }: DataSourceClientParams,
   callApiParams: LegacyClientCallAPIParams,
   openSearchClientPoolSetup: OpenSearchClientPoolSetup,
   config: DataSourcePluginConfigType,
@@ -56,6 +57,7 @@ export const configureLegacyClient = async (
       callApiParams,
       openSearchClientPoolSetup.addClientToPool,
       config,
+      customApiSchemaRegistryPromise,
       rootClient,
       dataSourceId
     );
@@ -85,6 +87,7 @@ const getQueryClient = async (
   { endpoint, clientParams, options }: LegacyClientCallAPIParams,
   addClientToPool: (endpoint: string, authType: AuthType, client: Client | LegacyClient) => void,
   config: DataSourcePluginConfigType,
+  customApiSchemaRegistryPromise: Promise<CustomApiSchemaRegistry>,
   rootClient?: LegacyClient,
   dataSourceId?: string
 ) => {
@@ -92,7 +95,8 @@ const getQueryClient = async (
     auth: { type },
     endpoint: nodeUrl,
   } = dataSourceAttr;
-  const clientOptions = parseClientOptions(config, nodeUrl);
+  const registeredSchema = (await customApiSchemaRegistryPromise).getAll();
+  const clientOptions = parseClientOptions(config, nodeUrl, registeredSchema);
   const cacheKey = generateCacheKey(dataSourceAttr, dataSourceId);
 
   switch (type) {
