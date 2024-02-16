@@ -95,7 +95,7 @@ export const configureClient = async (
  *
  * @param rootClient root client for the given data source.
  * @param dataSourceAttr data source saved object attributes
- * @param registeredSchema custom api schema to be registered when initiating client
+ * @param customApiSchemaRegistryPromise custom api schema registry promise to be used when initiating client to register api schema
  * @param cryptography cryptography service for password encryption / decryption
  * @param config data source config
  * @param addClientToPool function to add client to client pool
