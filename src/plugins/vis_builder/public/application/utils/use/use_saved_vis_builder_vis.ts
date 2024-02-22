@@ -40,6 +40,7 @@ export const useSavedVisBuilderVis = (visualizationIdFromUrl: string | undefined
       toastNotifications,
       savedVisBuilderLoader,
     } = services;
+    chrome.setShowPicker(false);
     const toastNotification = (message: string) => {
       toastNotifications.addDanger({
         title: i18n.translate('visualize.createVisualization.failedToLoadErrorMessage', {

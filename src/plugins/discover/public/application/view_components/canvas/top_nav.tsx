@@ -67,6 +67,7 @@ export const TopNav = ({ opts }: TopNavProps) => {
   useEffect(() => {
     const pageTitleSuffix = savedSearch?.id && savedSearch.title ? `: ${savedSearch.title}` : '';
     chrome.docTitle.change(`Discover${pageTitleSuffix}`);
+    chrome.setShowPicker(false);
 
     if (savedSearch?.id) {
       chrome.setBreadcrumbs([...getRootBreadcrumbs(), { text: savedSearch.title }]);

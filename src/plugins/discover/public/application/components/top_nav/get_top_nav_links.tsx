@@ -113,6 +113,7 @@ export const getTopNavLinks = (
             } else {
               chrome.docTitle.change(savedSearch.lastSavedTitle);
               chrome.setBreadcrumbs([...getRootBreadcrumbs(), { text: savedSearch.title }]);
+              chrome.setShowPicker(false);
             }
 
             // set App state to clean

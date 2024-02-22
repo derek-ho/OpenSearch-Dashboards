@@ -359,6 +359,7 @@ export interface ChromeStart {
     setHelpExtension(helpExtension?: ChromeHelpExtension): void;
     setHelpSupportUrl(url: string): void;
     setIsVisible(isVisible: boolean): void;
+    setShowPicker(showPicker: boolean): void;
 }
 
 // @public

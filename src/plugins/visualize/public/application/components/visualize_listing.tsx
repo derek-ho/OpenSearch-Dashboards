@@ -90,6 +90,7 @@ export const VisualizeListing = () => {
     chrome.docTitle.change(
       i18n.translate('visualize.listingPageTitle', { defaultMessage: 'Visualize' })
     );
+    chrome.setShowPicker(false);
   });
   useUnmount(() => closeNewVisModal.current());
 

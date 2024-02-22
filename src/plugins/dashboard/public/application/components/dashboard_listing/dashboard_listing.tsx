@@ -196,6 +196,8 @@ export const DashboardListing = () => {
       },
     ]);
 
+    chrome.setShowPicker(false);
+
     chrome.docTitle.change(
       i18n.translate('dashboard.dashboardPageTitle', { defaultMessage: 'Dashboards' })
     );

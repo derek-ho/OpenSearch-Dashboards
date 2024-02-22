@@ -29,6 +29,7 @@
  */
 
 import {
+  EuiComboBox,
   EuiHeader,
   EuiHeaderProps,
   EuiHeaderSection,
@@ -87,6 +88,7 @@ export interface HeaderProps {
   navControlsRight$: Observable<readonly ChromeNavControl[]>;
   navControlsExpandedCenter$: Observable<readonly ChromeNavControl[]>;
   navControlsExpandedRight$: Observable<readonly ChromeNavControl[]>;
+  showPicker$: Observable<boolean>;
   basePath: HttpStart['basePath'];
   isLocked$: Observable<boolean>;
   loadingCount$: ReturnType<HttpStart['getLoadingCount$']>;
@@ -94,6 +96,7 @@ export interface HeaderProps {
   branding: ChromeBranding;
   logos: Logos;
   survey: string | undefined;
+  dataSourceEnabled: boolean;
 }
 
 export function Header({
@@ -107,11 +110,14 @@ export function Header({
   survey,
   logos,
   collapsibleNavHeaderRender,
+  dataSourceEnabled,
   ...observables
 }: HeaderProps) {
   const isVisible = useObservable(observables.isVisible$, false);
   const isLocked = useObservable(observables.isLocked$, false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const showPicker = useObservable(observables.showPicker$, false);
 
   if (!isVisible) {
     return <LoadingIndicator loadingCount$={observables.loadingCount$} showAsBar />;
@@ -242,6 +248,26 @@ export function Header({
                   surveyLink={survey}
                 />
               </EuiHeaderSectionItem>
+              {dataSourceEnabled && showPicker && (
+                <EuiHeaderSectionItem border="left">
+                  <EuiComboBox
+                    aria-label={i18n.translate('clusterSelectorComboBoxAriaLabel', {
+                      defaultMessage: 'Select a data source',
+                    })}
+                    placeholder={i18n.translate('clusterSelectorComboBoxPlaceholder', {
+                      defaultMessage: 'Select a data source',
+                    })}
+                    singleSelection={{ asPlainText: true }}
+                    options={[{ label: 'Local Cluster' }]}
+                    selectedOptions={[{ label: 'Local Cluster' }]}
+                    onChange={(e) => {}}
+                    compressed
+                    isDisabled={false}
+                    fullWidth={true}
+                    data-test-subj={'clusterSelectorComboBox'}
+                  />
+                </EuiHeaderSectionItem>
+              )}
             </EuiHeaderSection>
           </EuiHeader>
         </div>

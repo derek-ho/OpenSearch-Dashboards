@@ -96,6 +96,7 @@ export interface StartDeps {
   injectedMetadata: InjectedMetadataStart;
   notifications: NotificationsStart;
   uiSettings: IUiSettingsClient;
+  dataSourceEnabled: boolean;
 }
 
 type CollapsibleNavHeaderRender = () => JSX.Element | null;
@@ -166,6 +167,7 @@ export class ChromeService {
     injectedMetadata,
     notifications,
     uiSettings,
+    dataSourceEnabled,
   }: StartDeps): Promise<InternalChromeStart> {
     this.initVisibility(application);
 
@@ -177,6 +179,7 @@ export class ChromeService {
     const customNavLink$ = new BehaviorSubject<ChromeNavLink | undefined>(undefined);
     const helpSupportUrl$ = new BehaviorSubject<string>(OPENSEARCH_DASHBOARDS_ASK_OPENSEARCH_LINK);
     const isNavDrawerLocked$ = new BehaviorSubject(localStorage.getItem(IS_LOCKED_KEY) === 'true');
+    const showPicker$ = new BehaviorSubject<boolean>(false);
 
     const navControls = this.navControls.start();
     const navLinks = this.navLinks.start({ application, http });
@@ -274,16 +277,19 @@ export class ChromeService {
           navControlsRight$={navControls.getRight$()}
           navControlsExpandedCenter$={navControls.getExpandedCenter$()}
           navControlsExpandedRight$={navControls.getExpandedRight$()}
+          showPicker$={showPicker$.pipe(takeUntil(this.stop$))}
           onIsLockedUpdate={setIsNavDrawerLocked}
           isLocked$={getIsNavDrawerLocked$}
           branding={injectedMetadata.getBranding()}
           logos={logos}
           survey={injectedMetadata.getSurvey()}
           collapsibleNavHeaderRender={this.collapsibleNavHeaderRender}
+          dataSourceEnabled={dataSourceEnabled}
         />
       ),
 
       setAppTitle: (appTitle: string) => appTitle$.next(appTitle),
+      setShowPicker: (showPicker: boolean) => showPicker$.next(showPicker),
 
       getIsVisible$: () => this.isVisible$,
 
@@ -481,6 +487,8 @@ export interface ChromeStart {
    * Get an observable of the current locked state of the nav drawer.
    */
   getIsNavDrawerLocked$(): Observable<boolean>;
+
+  setShowPicker(showPicker: boolean): void;
 }
 
 /** @internal */
