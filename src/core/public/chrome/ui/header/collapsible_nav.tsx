@@ -124,7 +124,7 @@ export function CollapsibleNav({
   const recentlyAccessed = useObservable(observables.recentlyAccessed$, []);
   const customNavLink = useObservable(observables.customNavLink$, undefined);
 
-  console.log("cuxnav", customNavLink)
+  console.log('cuxnav', customNavLink);
   const appId = useObservable(observables.appId$, '');
   const lockRef = useRef<HTMLButtonElement>(null);
   const groupedNavLinks = groupBy(navLinks, (link) => link?.category?.id);

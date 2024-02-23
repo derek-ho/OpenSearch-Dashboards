@@ -98,7 +98,7 @@ export function Main({ dataSourceId }: MainProps) {
 
   const lastDatum = requestData?.[requestData.length - 1] ?? requestError;
 
-  console.log("is not in console?")
+  console.log('is not in console?');
 
   return (
     <div id="consoleRoot">

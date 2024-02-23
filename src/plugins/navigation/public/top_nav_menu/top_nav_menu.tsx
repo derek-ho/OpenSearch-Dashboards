@@ -93,7 +93,7 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
 
   function renderItems(): ReactElement[] | null {
     if (!config || config.length === 0) return null;
-    console.log(config)
+    console.log(config);
     return config.map((menuItem: TopNavMenuData, i: number) => {
       return <TopNavMenuItem key={`nav-menu-${i}`} {...menuItem} />;
     });
@@ -116,16 +116,18 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
     return <SearchBar {...searchBarProps} />;
   }
 
-  function renderDataSourcePicker() : ReactElement | null {
+  function renderDataSourcePicker(): ReactElement | null {
     if (!showDataSourcePicker) return null;
-    return <ClusterSelector 
-            fullWidth={false}
-            hideLocalCluster={false}
-            disabled={false}
-            savedObjectsClient={undefined}
-            notifications={undefined}
-            onSelectedDataSource={() => console.log("hey")}
-    />
+    return (
+      <ClusterSelector
+        fullWidth={false}
+        hideLocalCluster={false}
+        disabled={false}
+        savedObjectsClient={undefined}
+        notifications={undefined}
+        onSelectedDataSource={() => console.log('hey')}
+      />
+    );
   }
 
   function renderLayout() {

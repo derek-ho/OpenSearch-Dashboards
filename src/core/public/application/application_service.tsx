@@ -341,7 +341,7 @@ export class ApplicationService {
   private refreshCurrentActionMenu = () => {
     const appId = this.currentAppId$.getValue();
     const currentActionMenu = appId ? this.appInternalStates.get(appId)?.actionMenu : undefined;
-    console.log("menu")
+    console.log('menu');
     console.log(currentActionMenu);
     this.currentActionMenu$.next(currentActionMenu);
   };
