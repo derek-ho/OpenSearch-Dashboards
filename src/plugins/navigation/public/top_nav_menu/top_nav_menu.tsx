@@ -41,6 +41,7 @@ import {
 } from '../../../data/public';
 import { TopNavMenuData } from './top_nav_menu_data';
 import { TopNavMenuItem } from './top_nav_menu_item';
+import { ClusterSelector } from '../../../../../src/plugins/data_source_management/public';
 
 export type TopNavMenuProps = StatefulSearchBarProps &
   Omit<SearchBarProps, 'opensearchDashboards' | 'intl' | 'timeHistory'> & {
@@ -50,6 +51,7 @@ export type TopNavMenuProps = StatefulSearchBarProps &
     showQueryInput?: boolean;
     showDatePicker?: boolean;
     showFilterBar?: boolean;
+    showDataSourcePicker?: boolean;
     data?: DataPublicPluginStart;
     className?: string;
     /**
@@ -83,7 +85,7 @@ export type TopNavMenuProps = StatefulSearchBarProps &
  **/
 
 export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
-  const { config, showSearchBar, ...searchBarProps } = props;
+  const { config, showSearchBar, showDataSourcePicker, ...searchBarProps } = props;
 
   if ((!config || config.length === 0) && (!showSearchBar || !props.data)) {
     return null;
@@ -91,6 +93,7 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
 
   function renderItems(): ReactElement[] | null {
     if (!config || config.length === 0) return null;
+    console.log(config)
     return config.map((menuItem: TopNavMenuData, i: number) => {
       return <TopNavMenuItem key={`nav-menu-${i}`} {...menuItem} />;
     });
@@ -101,6 +104,7 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
     return (
       <EuiHeaderLinks data-test-subj="top-nav" gutterSize="xs" className={className}>
         {renderItems()}
+        {renderDataSourcePicker()}
       </EuiHeaderLinks>
     );
   }
@@ -110,6 +114,18 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
     if (!showSearchBar || !props.data) return null;
     const { SearchBar } = props.data.ui;
     return <SearchBar {...searchBarProps} />;
+  }
+
+  function renderDataSourcePicker() : ReactElement | null {
+    if (!showDataSourcePicker) return null;
+    return <ClusterSelector 
+            fullWidth={false}
+            hideLocalCluster={false}
+            disabled={false}
+            savedObjectsClient={undefined}
+            notifications={undefined}
+            onSelectedDataSource={() => console.log("hey")}
+    />
   }
 
   function renderLayout() {

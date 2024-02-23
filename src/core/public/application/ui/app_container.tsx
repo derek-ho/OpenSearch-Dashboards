@@ -92,6 +92,8 @@ export const AppContainer: FunctionComponent<Props> = ({
     const mount = async () => {
       setShowSpinner(true);
       try {
+        console.log(mounter.appBasePath);
+        console.log(mounter);
         unmountRef.current =
           (await mounter.mount({
             appBasePath: mounter.appBasePath,
