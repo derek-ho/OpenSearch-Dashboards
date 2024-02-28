@@ -289,7 +289,6 @@ export class ChromeService {
       ),
 
       setAppTitle: (appTitle: string) => appTitle$.next(appTitle),
-      setShowPicker: (showPicker: boolean) => showPicker$.next(showPicker),
 
       getIsVisible$: () => this.isVisible$,
 
@@ -487,8 +486,6 @@ export interface ChromeStart {
    * Get an observable of the current locked state of the nav drawer.
    */
   getIsNavDrawerLocked$(): Observable<boolean>;
-
-  setShowPicker(showPicker: boolean): void;
 }
 
 /** @internal */

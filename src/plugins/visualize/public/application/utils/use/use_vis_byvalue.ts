@@ -67,10 +67,8 @@ export const useVisByValue = (
 
       if (chrome && originatingApp) {
         chrome.setBreadcrumbs(getBreadcrumbsPrefixedWithApp(originatingApp));
-        chrome.setShowPicker(false);
       } else if (chrome) {
         chrome.setBreadcrumbs(getEditBreadcrumbs());
-        chrome.setShowPicker(false);
       }
 
       loaded.current = true;

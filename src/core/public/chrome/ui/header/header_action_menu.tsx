@@ -46,8 +46,6 @@ export const HeaderActionMenu: FC<HeaderActionMenuProps> = ({ actionMenu$ }) => 
   const [mounter, setMounter] = useState<{ mount: MountPoint | undefined }>({ mount: undefined });
   useLayoutEffect(() => {
     const s = actionMenu$.subscribe((value) => {
-      console.log('when is');
-      console.log(value);
       setMounter({ mount: value });
     });
     return () => s.unsubscribe();
@@ -61,8 +59,6 @@ export const HeaderActionMenu: FC<HeaderActionMenuProps> = ({ actionMenu$ }) => 
       unmountRef.current();
       unmountRef.current = null;
     }
-
-    console.log('element ref is', elementRef.current);
 
     if (mounter.mount && elementRef.current) {
       try {

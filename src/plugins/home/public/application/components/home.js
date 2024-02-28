@@ -89,7 +89,6 @@ export class Home extends Component {
 
     const homeTitle = i18n.translate('home.breadcrumbs.homeTitle', { defaultMessage: 'Home' });
     getServices().chrome.setBreadcrumbs([{ text: homeTitle }]);
-    getServices().chrome.setShowPicker(false);
   }
 
   fetchIsNewOpenSearchDashboardsInstance = async () => {

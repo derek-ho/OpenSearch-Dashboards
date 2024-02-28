@@ -68,7 +68,6 @@ export class PluginsService implements CoreService<PluginsServiceSetup, PluginsS
   private readonly pluginDependencies = new Map<PluginName, PluginName[]>();
 
   private readonly satupPlugins: PluginName[] = [];
-  public dataSourceEnabled: boolean = false;
 
   constructor(private readonly coreContext: CoreContext, plugins: InjectedPluginMetadata[]) {
     // Generate opaque ids
@@ -76,9 +75,6 @@ export class PluginsService implements CoreService<PluginsServiceSetup, PluginsS
 
     // Setup dependency map and plugin wrappers
     plugins.forEach(({ id, plugin, config = {} }) => {
-      if (id === 'dataSource' && config.enabled) {
-        this.dataSourceEnabled = true;
-      }
       // Setup map of dependencies
       this.pluginDependencies.set(id, [
         ...plugin.requiredPlugins,

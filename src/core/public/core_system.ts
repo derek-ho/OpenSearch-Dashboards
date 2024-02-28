@@ -113,7 +113,6 @@ export class CoreSystem {
   private readonly coreContext: CoreContext;
   private readonly workspaces: WorkspacesService;
   private fatalErrorsSetup: FatalErrorsSetup | null = null;
-  private dataSourceEnabled: boolean = false;
 
   constructor(params: Params) {
     const { rootDomElement, browserSupportsCsp, injectedMetadata } = params;
@@ -147,9 +146,6 @@ export class CoreSystem {
 
     this.context = new ContextService(this.coreContext);
     this.plugins = new PluginsService(this.coreContext, injectedMetadata.uiPlugins);
-    if (this.plugins.dataSourceEnabled) {
-      this.dataSourceEnabled = true;
-    }
     this.coreApp = new CoreApp(this.coreContext);
   }
 
@@ -239,7 +235,6 @@ export class CoreSystem {
         injectedMetadata,
         notifications,
         uiSettings,
-        dataSourceEnabled: this.dataSourceEnabled,
       });
 
       this.coreApp.start({ application, http, notifications, uiSettings });

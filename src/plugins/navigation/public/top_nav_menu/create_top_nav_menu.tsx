@@ -29,7 +29,7 @@
  */
 
 import React from 'react';
-import { I18nStart } from 'opensearch-dashboards/public';
+import { I18nStart, NotificationsStart, SavedObjectsStart } from 'opensearch-dashboards/public';
 import { DataPublicPluginStart } from 'src/plugins/data/public';
 import { TopNavMenuProps, TopNavMenu } from './top_nav_menu';
 import { RegisteredTopNavMenuData } from './top_nav_menu_data';
@@ -37,7 +37,9 @@ import { RegisteredTopNavMenuData } from './top_nav_menu_data';
 export function createTopNav(
   data: DataPublicPluginStart,
   extraConfig: RegisteredTopNavMenuData[],
-  i18n: I18nStart
+  i18n: I18nStart,
+  savedObjects: SavedObjectsStart,
+  notifications: NotificationsStart
 ) {
   return (props: TopNavMenuProps) => {
     const relevantConfig = extraConfig.filter(
@@ -47,7 +49,13 @@ export function createTopNav(
 
     return (
       <i18n.Context>
-        <TopNavMenu {...props} data={data} config={config} />
+        <TopNavMenu
+          {...props}
+          data={data}
+          config={config}
+          savedObjects={savedObjects.client}
+          notifications={notifications}
+        />
       </i18n.Context>
     );
   };

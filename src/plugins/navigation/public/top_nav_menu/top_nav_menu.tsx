@@ -32,7 +32,11 @@ import React, { ReactElement } from 'react';
 import { EuiHeaderLinks } from '@elastic/eui';
 import classNames from 'classnames';
 
-import { MountPoint } from '../../../../core/public';
+import {
+  MountPoint,
+  NotificationsStart,
+  SavedObjectsClientContract,
+} from '../../../../core/public';
 import { MountPointPortal } from '../../../opensearch_dashboards_react/public';
 import {
   StatefulSearchBarProps,
@@ -73,6 +77,9 @@ export type TopNavMenuProps = StatefulSearchBarProps &
      * ```
      */
     setMenuMountPoint?: (menuMount: MountPoint | undefined) => void;
+    savedObjects?: SavedObjectsClientContract;
+    notifications?: NotificationsStart;
+    dataSourceCallBackFunc?: any;
   };
 
 /*
@@ -85,7 +92,15 @@ export type TopNavMenuProps = StatefulSearchBarProps &
  **/
 
 export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
-  const { config, showSearchBar, showDataSourcePicker, ...searchBarProps } = props;
+  const {
+    config,
+    showSearchBar,
+    savedObjects,
+    notifications,
+    dataSourceCallBackFunc,
+    showDataSourcePicker,
+    ...searchBarProps
+  } = props;
 
   if ((!config || config.length === 0) && (!showSearchBar || !props.data)) {
     return null;
@@ -93,7 +108,6 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
 
   function renderItems(): ReactElement[] | null {
     if (!config || config.length === 0) return null;
-    console.log(config);
     return config.map((menuItem: TopNavMenuData, i: number) => {
       return <TopNavMenuItem key={`nav-menu-${i}`} {...menuItem} />;
     });
@@ -123,9 +137,9 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
         fullWidth={false}
         hideLocalCluster={false}
         disabled={false}
-        savedObjectsClient={undefined}
-        notifications={undefined}
-        onSelectedDataSource={() => console.log('hey')}
+        savedObjectsClient={savedObjects!}
+        notifications={notifications!.toasts}
+        onSelectedDataSource={dataSourceCallBackFunc}
       />
     );
   }
