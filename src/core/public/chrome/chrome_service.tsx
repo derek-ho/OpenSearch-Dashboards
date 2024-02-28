@@ -166,7 +166,6 @@ export class ChromeService {
     injectedMetadata,
     notifications,
     uiSettings,
-    dataSourceEnabled,
   }: StartDeps): Promise<InternalChromeStart> {
     this.initVisibility(application);
 

@@ -55,7 +55,6 @@ export function setServices(newServices: any) {
 export const setUiActions = (pluginUiActions: UiActionsStart) => (uiActions = pluginUiActions);
 export const getUiActions = () => uiActions;
 
-// console.log("useful")
 export const [getHeaderActionMenuMounter, setHeaderActionMenuMounter] = createGetterSetter<
   AppMountParameters['setHeaderActionMenu']
 >('headerActionMenuMounter');
