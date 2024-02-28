@@ -29,7 +29,6 @@
  */
 
 import {
-  EuiComboBox,
   EuiHeader,
   EuiHeaderProps,
   EuiHeaderSection,
@@ -95,7 +94,6 @@ export interface HeaderProps {
   branding: ChromeBranding;
   logos: Logos;
   survey: string | undefined;
-  dataSourceEnabled: boolean;
 }
 
 export function Header({
@@ -109,7 +107,6 @@ export function Header({
   survey,
   logos,
   collapsibleNavHeaderRender,
-  dataSourceEnabled,
   ...observables
 }: HeaderProps) {
   const isVisible = useObservable(observables.isVisible$, false);
