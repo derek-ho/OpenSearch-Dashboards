@@ -56,6 +56,7 @@ export type TopNavMenuProps = StatefulSearchBarProps &
     showDatePicker?: boolean;
     showFilterBar?: boolean;
     showDataSourcePicker?: boolean;
+    dataSourcePickerReadOnly?: boolean;
     data?: DataPublicPluginStart;
     className?: string;
     /**
@@ -98,6 +99,7 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
     savedObjects,
     notifications,
     dataSourceCallBackFunc,
+    dataSourcePickerReadOnly,
     showDataSourcePicker,
     ...searchBarProps
   } = props;
@@ -140,7 +142,7 @@ export function TopNavMenu(props: TopNavMenuProps): ReactElement | null {
       <ClusterSelector
         fullWidth={false}
         hideLocalCluster={false}
-        disabled={false}
+        disabled={!!dataSourcePickerReadOnly}
         savedObjectsClient={savedObjects!}
         notifications={notifications!.toasts}
         onSelectedDataSource={dataSourceCallBackFunc}
